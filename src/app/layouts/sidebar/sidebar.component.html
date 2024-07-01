@@ -1,0 +1,10 @@
+<div class="sidebar">
+    <a routerLink="{{role}}/profile" [ngClass]="{'active': selectedField == 'profile'}" value='profile'
+        (click)="clickEvent($event)" aria-current="page">Profile</a>
+    <a *ngIf="role == 'admin'" routerLink="{{role}}/dashboard" [ngClass]="{'active': selectedField == 'dashboard'}" value='dashboard'
+        (click)="clickEvent($event)">Dashboard</a>
+    <a routerLink="{{role}}/media" [ngClass]="{'active': selectedField == 'media'}" value='media'
+        (click)="clickEvent($event)">Media</a>
+    <a routerLink="{{role}}/article" [ngClass]="{'active': selectedField == 'article'}" value='article'
+        (click)="clickEvent($event)">Article</a>
+</div>

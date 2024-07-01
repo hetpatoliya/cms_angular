@@ -1,0 +1,90 @@
+<div class="my-3 mx-2 d-flex">
+    <h1>Media</h1>
+    <button class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#modalId">Add Content</button>
+</div>
+
+<div *ngFor="let image of imgMedia" class="card m-5" style="width: 18rem;">
+    <img (click)="openMedia('http://localhost:3000/' + image.url.split('\\')[2])" class="card-img-top" [src]="'http://localhost:3000/' + image.url.split('\\')[2]" alt="Card image cap">
+    <a #link [href]="'http://localhost:3000/' + image.url.split('\\')[2]" target="_blank"></a>
+    <div class="card-body">
+        <h5 class="card-title">{{image.title}}</h5>
+        <p class="card-text">{{image.description}}</p>
+        <div class="d-flex">
+            <!-- <a class="btn btn-warning" (click)="editMedia(image)">Edit</a> -->
+            <a class="btn btn-danger ms-auto" (click)="deleteMedia(image)">Delete</a>
+        </div>
+    </div>
+</div>
+
+<div *ngFor="let video of videoMedia" class="card m-5" style="width: 18rem;">
+    <video (click)="openMedia('http://localhost:3000/' + video.url.split('\\')[2])" controls class="card-img-top" alt="Card image cap" alt="click to view">
+        <source [src]="'http://localhost:3000/' + video.url.split('\\')[2]" />
+    </video>
+    <a #link [href]="'http://localhost:3000/' + video.url.split('\\')[2]" target="_blank"></a>
+    <div class="card-body">
+        <h5 class="card-title">{{video.title}}</h5>
+        <p class="card-text">{{video.description}}</p>
+        <div class="d-flex">
+            <!-- <a class="btn btn-warning" (click)="editMedia(video)">Edit</a> -->
+            <a class="btn btn-danger ms-auto" (click)="deleteMedia(video)">Delete</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">
+                    Add Media
+                </h5>
+                <button type="button" class="btn-close" #closeBtn (click)="onReset()" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="mediaForm" (ngSubmit)="submitMedia()">
+                    <div class="form-floating my-3">
+                        <input type="text" class="form-control" formControlName="title" placeholder="Title"
+                            [ngClass]="{'is-invalid': mediaForm.get('title')?.invalid && (submitted || mediaForm.get('title')?.touched)}">
+                        <label>Title</label>
+                        <div *ngIf="mediaForm.get('title')?.invalid && (submitted || mediaForm.get('title')?.touched)"
+                            class="invalid-feedback">
+                            <div *ngIf="mediaForm.get('title')?.errors?.['required']">Title is Required</div>
+                        </div>
+                    </div>
+                    <div class="form-floating my-3">
+                        <input type="text" class="form-control" formControlName="description" placeholder="Description"
+                            [ngClass]="{'is-invalid': mediaForm.get('description')?.invalid && (submitted || mediaForm.get('description')?.touched)}">
+                        <label for="floatingInput">Description</label>
+                        <div *ngIf="mediaForm.get('description')?.invalid && (submitted || mediaForm.get('description')?.touched)"
+                            class="invalid-feedback">
+                            <div *ngIf="mediaForm.get('description')?.errors?.['required']">Description is Required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="file" class="form-control" id="inputGroupFile04"
+                            aria-describedby="inputGroupFileAddon04" aria-label="Upload" formControlName="file"
+                            (change)="onFileChange($event)"
+                            [ngClass]="{'is-invalid': mediaForm.get('file')?.invalid && (submitted || mediaForm.get('file')?.touched)}">
+                        <div *ngIf="mediaForm.get('file')?.invalid && (submitted || mediaForm.get('file')?.touched)"
+                            class="invalid-feedback">
+                            <div *ngIf="mediaForm.get('file')?.errors?.['required']">Title is Required</div>
+                        </div>
+                    </div>
+                    <div class="text-center table-responsive">
+                        <img class="img-responsive" [src]="url" *ngIf="format==='image' && url"> <br />
+                        <video [src]="url" *ngIf="format==='video' && url" controls></video>
+                    </div>
+                    <button class="btn btn-primary my-3 w-100">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" #closeBtn data-bs-dismiss="modal" (click)="onReset()">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="text-center">
+    <h1>Chart</h1>
+</div>
+<div class="card flex mx-auto mt-4 w-50">
+    <p-chart type="doughnut" [data]="data" [options]="options" />
+</div>
+
+<div class="row my-5 row-cols-1 row-cols-md-3 mx-auto g-4">
+    <div class="col">
+        <div class="card h-100 text-white bg-primary">
+            <div class="card-body">
+                <h3 class="card-title">Viewers</h3>
+                <h5 class="card-text">Total Viewers: {{viewers.length}}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100 text-white bg-success">
+            <div class="card-body">
+                <h3 class="card-title">Editors</h3>
+                <h5 class="card-text">Total Editors: {{editors.length}}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100 text-white bg-danger">
+            <div class="card-body">
+                <h3 class="card-title">Admins</h3>
+                <h5 class="card-text">Total Admins: {{admin.length}}</h5>
+            </div>
+        </div>
+    </div>
+</div>

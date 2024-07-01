@@ -1,0 +1,6 @@
+<div *ngFor="let article of allArticle" class="card m-5" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{article.title}}</h5>
+        <p class="card-text" [innerHTML]="article.body"></p>
+    </div>
+</div>
